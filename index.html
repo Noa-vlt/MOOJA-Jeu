@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Une parenthèse de surf au bord de l'océan."
+    />
+    <meta name="theme-color" content="#a8d7dc" />
+    <title>MOOJA — Surf the tide</title>
+  </head>
+  <body>
+    <main class="experience" aria-label="Décor 3D de plage">
+      <div id="scene" class="scene" aria-hidden="true"></div>
+      <section
+        id="main-menu"
+        class="main-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="main-menu-title"
+      >
+        <div class="main-menu__panel">
+          <header class="main-menu__header">
+            <p class="intro__eyebrow">Une parenthèse au bord de l'océan</p>
+            <h1 id="main-menu-title">MOOJA</h1>
+            <p class="intro__caption">Surf the tide</p>
+            <p class="main-menu__wallet">
+              Tes pièces <strong id="wallet-balance">0</strong>
+            </p>
+          </header>
+          <section class="character-picker" aria-labelledby="character-picker-title">
+            <h2 id="character-picker-title">Choisis ton surfeur</h2>
+            <div id="character-grid" class="character-grid" aria-label="Personnages"></div>
+          </section>
+          <p id="progress-status" class="main-menu__status" aria-live="polite"></p>
+          <section class="audio-controls" aria-label="Réglages du son">
+            <h2>Ambiance sonore</h2>
+            <button id="sound-toggle" type="button" aria-pressed="false">
+              Activer le son
+            </button>
+            <label for="volume-control">
+              Volume <span id="volume-value">35 %</span>
+            </label>
+            <input
+              id="volume-control"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.35"
+              aria-label="Volume de l’ambiance sonore"
+            />
+            <p id="sound-status" aria-live="polite"></p>
+          </section>
+          <button id="start-game" class="main-menu__start" type="button">
+            Entrer dans l’océan
+          </button>
+        </div>
+      </section>
+      <section class="intro" aria-label="MOOJA" hidden>
+        <p class="intro__eyebrow">Une parenthèse au bord de l'océan</p>
+        <h1>MOOJA</h1>
+        <p class="intro__caption">Surf the tide</p>
+      </section>
+      <div id="game-ui" class="game-ui" hidden>
+        <button id="return-to-menu" class="return-to-menu" type="button">
+          Menu
+        </button>
+        <aside class="top-right-hud" aria-label="Score et records personnels">
+          <p class="weather-status" id="weather-status" aria-live="polite">
+            Soleil
+          </p>
+          <div class="score-display" aria-label="Score de la session">
+            <p class="score-display__item">
+              <span>Pièces</span><strong id="coin-balance">0</strong>
+            </p>
+            <p class="score-display__item">
+              <span>Combo</span><strong id="combo-multiplier">x1</strong>
+            </p>
+            <p class="score-display__last">
+              <span>Dernière figure</span><strong id="last-trick">Aucune</strong>
+            </p>
+          </div>
+          <details class="statistics">
+            <summary>Records personnels</summary>
+            <dl class="statistics__list">
+              <div><dt>Plus long ride</dt><dd id="longest-ride">0.0 s</dd></div>
+              <div><dt>Plus gros combo</dt><dd id="highest-combo">x1</dd></div>
+              <div><dt>Plus de pièces</dt><dd id="most-coins">0</dd></div>
+              <div><dt>Figures réussies</dt><dd id="total-tricks">0</dd></div>
+            </dl>
+            <p
+              id="statistics-storage-status"
+              class="statistics__status"
+              aria-live="polite"
+            ></p>
+          </details>
+        </aside>
+        <div class="player-controls">
+          <p
+            id="player-status"
+            class="player-controls__status"
+            aria-live="polite"
+          >
+            Position : couché
+          </p>
+          <p
+            id="catch-feedback"
+            class="player-controls__feedback"
+            aria-live="polite"
+          >
+            Pagaye, puis espace au bon moment.
+          </p>
+          <button
+            id="player-toggle"
+            class="player-controls__button"
+            type="button"
+          >
+            <span id="player-toggle-label">Se lever</span>
+            <span aria-hidden="true">· Espace</span>
+          </button>
+          <p class="player-controls__hint">
+            ↑ pagayer · ← → tourner · espace se lever · 1–3 figures
+          </p>
+        </div>
+        <div class="trick-controls">
+          <button
+            id="trick-panel-toggle"
+            class="trick-controls__toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="trick-panel"
+          >
+            Figures
+          </button>
+          <div id="trick-panel" class="trick-controls__panel" hidden>
+            <button type="button" data-trick="air">Air <span>1</span></button>
+            <button type="button" data-trick="rotation360">360° <span>2</span></button>
+            <button type="button" data-trick="cutback">Cutback <span>3</span></button>
+          </div>
+        </div>
+        <div
+          id="movement-controls"
+          class="movement-controls"
+          aria-label="Commandes de déplacement"
+        >
+          <button
+            class="movement-controls__button movement-controls__up"
+            type="button"
+            data-direction="up"
+            aria-label="Avancer"
+          >
+            ↑
+          </button>
+          <button
+            class="movement-controls__button movement-controls__left"
+            type="button"
+            data-direction="left"
+            aria-label="Tourner à gauche"
+          >
+            ←
+          </button>
+          <button
+            class="movement-controls__button movement-controls__down"
+            type="button"
+            data-direction="down"
+            aria-label="Reculer debout"
+          >
+            ↓
+          </button>
+          <button
+            class="movement-controls__button movement-controls__right"
+            type="button"
+            data-direction="right"
+            aria-label="Tourner à droite"
+          >
+            →
+          </button>
+        </div>
+        <p class="scene-note">Respire. La marée arrive.</p>
+      </div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
