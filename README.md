@@ -29,6 +29,9 @@ Choose Noa for free, or unlock Emilio (100 coins), Malou (350 coins), and Léo
 selected surfer are saved in the browser. The sound toggle and volume control
 are available only in the main menu.
 
+Each successful figure earns 5 to 10 base coins, multiplied by the current
+combo.
+
 Character portrait PNGs can be added to `assets/characters/` as `noa.png`,
 `emilio.png`, `malou.png`, and `leo.png`. Missing or invalid portraits use the
 colored avatar fallback.

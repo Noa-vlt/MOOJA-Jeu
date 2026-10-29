@@ -1,7 +1,7 @@
 const TRICK_REWARDS = {
-  air: 10,
-  rotation360: 50,
-  cutback: 15,
+  air: 5,
+  rotation360: 10,
+  cutback: 7,
 };
 
 const MAX_COMBO = 10;
